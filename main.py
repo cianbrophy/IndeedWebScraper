@@ -1,21 +1,32 @@
 import requests
 from bs4 import BeautifulSoup
 
-URL = 'https://www.monster.com/jobs/search/?q=Software-Developer&where=Australia'
+URL = 'https://ie.indeed.com/jobs?q=&l=Ireland'
 
 page = requests.get(URL)
 
 soup = BeautifulSoup(page.content, 'html.parser')
 
-results = soup.find(id='ResultsContainer')
+job_elems = soup.find_all('div', 'jobsearch-SerpJobCard')
 
-
-job_elems = results.find_all('section', class_='card-content')
 
 for job_elem in job_elems:
-    print(job_elem, end='\n'*2)
-    ##title_elem = job_elem.find('h2', class_ = 'title')
-    ##info_elem = job_elem.find('div', class_ = 'sjcl')
-    ##print(title_elem)
-    ##print(info_elem)
-    ##print()
+    
+    title = job_elem.find('h2', class_ = 'title')
+
+    company = job_elem.find('span', class_ = 'company')
+    if None in company:
+        continue
+
+    location = job_elem.find('span',class_ = 'location')
+    if None in location:
+        continue
+
+    if "new" in title.text:
+        title.text.replace("new", "")
+
+    print(title.text.strip())
+    print(location.text.strip())
+    print(company.text.strip())
+    print()
+
