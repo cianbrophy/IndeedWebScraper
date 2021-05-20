@@ -23,26 +23,41 @@ def findJobs(URL):
             continue
 
 
-        print("\nJob Title: " + title.text.strip())
+        print("Job Title: " + title.text.strip())
         print("Location: " + location.text.strip())
         print("Company Name: " + company.text.strip())
         print()
 
-keyword = input("Enter any keywords (jobs, title, company etc.):\n")
-location = input("Enter your preferred location:\n")
+def main():
+    keyword = input("Enter any keywords (jobs, title, company etc.):\n")
+    location = input("Enter your preferred location:\n")
 
-URL = 'https://ie.indeed.com/jobs?q=' + keyword + '&l=' + location + ''
+    URL = 'https://ie.indeed.com/jobs?q=' + keyword + '&l=' + location + ''
 
-print(URL)
+    print(URL)
 
-findJobs(URL)
+    findJobs(URL)
 
-nextPage = input("Would you like to view another page? (Yes/No)\n")
+    pageNumber = 10
 
-pageNumber = 10
+    nextPage = None
+    isFinished = False
+    
+    while isFinished == False:
+        
+        nextPage = input("Would you like to view another page? (Yes/No)\n").lower()
 
-if nextPage == "Yes":
-    URL += "&start=" + str(pageNumber)
-    pageNumber + 10
+        if nextPage == "yes":
+            URL += "&start=" + str(pageNumber)
+            pageNumber + 10
+            findJobs(URL)
 
-findJobs(URL)
+        if nextPage == "no":
+            isFinished == True
+            break
+        else:
+            print("Invalid command entered, please enter Yes/No")
+
+
+if __name__ == '__main__':
+    main()
