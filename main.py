@@ -9,11 +9,14 @@ def findJobs(URL):
 
     job_elems = soup.find_all('div', 'jobsearch-SerpJobCard')
 
+    if not job_elems:
+        print("Sorry, no jobs found!\n")
+        return 0
 
     for job_elem in job_elems:
     
-        title = job_elem.find('h2', class_ = 'title')
-
+        title = job_elem.find('a', class_ = 'jobtitle')
+       
         company = job_elem.find('span', class_ = 'company')
         if company is None:
                 continue
@@ -28,18 +31,18 @@ def findJobs(URL):
         print("Company Name: " + company.text.strip())
         print()
 
+# main function
 def main():
     keyword = input("Enter any keywords (jobs, title, company etc.):\n")
     location = input("Enter your preferred location:\n")
 
     URL = 'https://ie.indeed.com/jobs?q=' + keyword + '&l=' + location + ''
 
-    print(URL)
-
+    print()
     findJobs(URL)
 
+   
     pageNumber = 10
-
     nextPage = None
     isFinished = False
     
@@ -58,6 +61,6 @@ def main():
         else:
             print("Invalid command entered, please enter Yes/No")
 
-
+# main call
 if __name__ == '__main__':
     main()
