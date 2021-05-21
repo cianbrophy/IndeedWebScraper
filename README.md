@@ -1,6 +1,6 @@
 # IndeedWebScraper
 
-## Web Scraper Designed to Scrape ***indeed.ie*** for various jobs
+## Web Scraper Designed to Scrape ***indeed.ie*** for Various Jobs
 
 ### Instructions
 
