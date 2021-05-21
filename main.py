@@ -1,5 +1,6 @@
 import requests
 from bs4 import BeautifulSoup
+import sys
 
 ## function to find jobs
 def findJobs(URL):
@@ -11,7 +12,7 @@ def findJobs(URL):
 
     if not job_elems:
         print("Sorry, no jobs found!\n")
-        return 0
+        sys.exit()
 
     for job_elem in job_elems:
     
@@ -39,16 +40,15 @@ def main():
     URL = 'https://ie.indeed.com/jobs?q=' + keyword + '&l=' + location + ''
 
     print()
-    findJobs(URL)
+    findJobs(URL) 
 
-   
     pageNumber = 10
     nextPage = None
     isFinished = False
     
     while isFinished == False:
         
-        nextPage = input("Would you like to view another page? (Yes/No)\n").lower()
+        nextPage = input("Would you like to view another page? (Please Enter Yes/No)\n").lower()
 
         if nextPage == "yes":
             URL += "&start=" + str(pageNumber)
@@ -58,8 +58,6 @@ def main():
         if nextPage == "no":
             isFinished == True
             break
-        else:
-            print("Invalid command entered, please enter Yes/No")
 
 # main call
 if __name__ == '__main__':
