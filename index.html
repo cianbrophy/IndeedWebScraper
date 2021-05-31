@@ -2,13 +2,18 @@
 <html lang = "en">
     <head>
         <title>Indeed (IE) Web Scraper</title>
+        <?PHP 
+        $keyword = $_POST['keyword'];
+        $location = $_POST['location'];
+        echo shell_exec("python main.py");
+        ?>
     </head>
     <body>
         <form>
         <h4>Enter any keywords (jobs, title, company etc.):</h4>
-        <input type = "text"></input>
+        <input type = "text" name ="keyword"></input>
         <h4>Enter your preferred location:</h4>
-        <input type = "text"></input>
+        <input type = "text" name = "location"></input>
         <button type="submit">Search</button>
         </form>
     </body>
